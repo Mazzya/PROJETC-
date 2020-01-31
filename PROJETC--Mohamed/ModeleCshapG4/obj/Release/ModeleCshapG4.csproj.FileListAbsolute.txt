@@ -1,0 +1,11 @@
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\DB\GestionCapteur.mdf
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\DB\GestionCapteur_log.ldf
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\EntityFramework.dll
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\EntityFramework.xml
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\fr\EntityFramework.resources.dll
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\bin\Release\fr\EntityFramework.SqlServer.resources.dll
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\obj\Release\ModeleCshapG4.csproj.CopyComplete
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\obj\Release\ModeleCshapG4.dll
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\ModeleCshapG4\obj\Release\ModeleCshapG4.pdb
