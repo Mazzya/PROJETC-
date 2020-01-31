@@ -1,0 +1,12 @@
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\DB\GestionCapteur.mdf
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\DB\GestionCapteur_log.ldf
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\EntityFramework.dll
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\EntityFramework.xml
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\fr\EntityFramework.resources.dll
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\bin\Debug\fr\EntityFramework.SqlServer.resources.dll
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\obj\Debug\ModeleCshapG4.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\obj\Debug\ModeleCshapG4.csproj.CopyComplete
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\obj\Debug\ModeleCshapG4.dll
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\ModeleCshapG4\obj\Debug\ModeleCshapG4.pdb

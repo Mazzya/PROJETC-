@@ -1,0 +1,26 @@
+﻿<Window x:Class="VueProjetCsharp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VueProjetCsharp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="181*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="importer" Content="Importer" HorizontalAlignment="Left" Margin="35,101,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="3" RenderTransformOrigin="0.578,-2.376" Click="Button_Click"/>
+        <ComboBox x:Name="ID_Capteurs" HorizontalAlignment="Left" Margin="35,44,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="3" IsSynchronizedWithCurrentItem="False" SelectionChanged="ID_Capteurs_SelectionChanged" IsEditable="True" TextBoxBase.TextChanged="ComboBox_TextChanged"  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="ID Capteurs">
+            <!--<ComboBoxItem Content="11112939" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="11112356" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="11117954" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="11132433" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="11132422" HorizontalAlignment="Left" Width="118"/>-->
+        </ComboBox>
+        <TextBox x:Name="textbox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="59,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"  AutomationProperties.Name="textbox" SpellCheck.IsEnabled="True"/>
+
+    </Grid>
+</Window>
