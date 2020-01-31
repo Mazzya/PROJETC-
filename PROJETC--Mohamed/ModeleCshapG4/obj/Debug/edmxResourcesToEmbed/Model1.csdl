@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionCapteurModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Capteurs">
+    <Key>
+      <PropertyRef Name="id_capteur" />
+    </Key>
+    <Property Name="id_capteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="num_capteur" Type="Int32" Nullable="false" />
+    <Property Name="lieu" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Releves" Relationship="Self.FK__Releves__id_capt__5EBF139D" FromRole="Capteurs" ToRole="Releves" />
+  </EntityType>
+  <EntityType Name="Releves">
+    <Key>
+      <PropertyRef Name="id_releve" />
+    </Key>
+    <Property Name="id_releve" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="releve_DTTM" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="hygrometrie" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <Property Name="temperature" Type="Decimal" Precision="4" Scale="1" Nullable="false" />
+    <Property Name="id_capteur" Type="Int32" Nullable="false" />
+    <Property Name="insertion_DTTM" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Capteurs" Relationship="Self.FK__Releves__id_capt__5EBF139D" FromRole="Releves" ToRole="Capteurs" />
+  </EntityType>
+  <Association Name="FK__Releves__id_capt__5EBF139D">
+    <End Role="Capteurs" Type="Self.Capteurs" Multiplicity="1" />
+    <End Role="Releves" Type="Self.Releves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Capteurs">
+        <PropertyRef Name="id_capteur" />
+      </Principal>
+      <Dependent Role="Releves">
+        <PropertyRef Name="id_capteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionCapteurEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Capteurs" EntityType="Self.Capteurs" />
+    <EntitySet Name="Releves" EntityType="Self.Releves" />
+    <AssociationSet Name="FK__Releves__id_capt__5EBF139D" Association="Self.FK__Releves__id_capt__5EBF139D">
+      <End Role="Capteurs" EntitySet="Capteurs" />
+      <End Role="Releves" EntitySet="Releves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

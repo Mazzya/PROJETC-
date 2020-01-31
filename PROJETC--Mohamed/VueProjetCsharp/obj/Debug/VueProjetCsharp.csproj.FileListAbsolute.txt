@@ -1,0 +1,5 @@
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\VueProjetCsharp\obj\Debug\VueProjetCsharp.csprojAssemblyReference.cache
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\VueProjetCsharp\obj\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\VueProjetCsharp\obj\Debug\App.g.cs
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\VueProjetCsharp\obj\Debug\VueProjetCsharp_MarkupCompile.cache
+C:\Users\user\Desktop\Vue Projet\PROJETC--Mohamed\VueProjetCsharp\obj\Debug\VueProjetCsharp_MarkupCompile.lref
