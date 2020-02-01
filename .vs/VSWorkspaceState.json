@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\PROJETC--Mohamed",
+    "\\PROJETC--Mohamed\\ModeleCshapG4",
+    "\\PROJETC--Mohamed\\ModeleCshapG4\\bin\\Release\\fr",
+    "\\PROJETC--Mohamed\\ModeleCshapG4\\Services",
+    "\\PROJETC--Mohamed\\packages",
+    "\\PROJETC--Mohamed\\packages\\EntityFramework.6.2.0",
+    "\\PROJETC--Mohamed\\packages\\EntityFramework.6.2.0\\content",
+    "\\PROJETC--Mohamed\\packages\\EntityFramework.6.2.0\\lib",
+    "\\PROJETC--Mohamed\\packages\\EntityFramework.6.2.0\\lib\\net40"
+  ],
+  "SelectedNode": "\\PROJETC--Mohamed\\packages\\EntityFramework.6.2.0\\lib\\net40\\EntityFramework.dll",
+  "PreviewInSolutionExplorer": false
+}

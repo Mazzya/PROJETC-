@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionCapteurModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Capteurs">
+    <Key>
+      <PropertyRef Name="id_capteur" />
+    </Key>
+    <Property Name="id_capteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="num_capteur" Type="int" Nullable="false" />
+    <Property Name="lieu" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Releves">
+    <Key>
+      <PropertyRef Name="id_releve" />
+    </Key>
+    <Property Name="id_releve" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="releve_DTTM" Type="datetime" Nullable="false" />
+    <Property Name="hygrometrie" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+    <Property Name="temperature" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+    <Property Name="id_capteur" Type="int" Nullable="false" />
+    <Property Name="insertion_DTTM" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Releves__id_capt__5EBF139D">
+    <End Role="Capteurs" Type="Self.Capteurs" Multiplicity="1" />
+    <End Role="Releves" Type="Self.Releves" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Capteurs">
+        <PropertyRef Name="id_capteur" />
+      </Principal>
+      <Dependent Role="Releves">
+        <PropertyRef Name="id_capteur" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionCapteurModelStoreContainer">
+    <EntitySet Name="Capteurs" EntityType="Self.Capteurs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Releves" EntityType="Self.Releves" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Releves__id_capt__5EBF139D" Association="Self.FK__Releves__id_capt__5EBF139D">
+      <End Role="Capteurs" EntitySet="Capteurs" />
+      <End Role="Releves" EntitySet="Releves" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

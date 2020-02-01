@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionCapteurModelStoreContainer" CdmEntityContainer="GestionCapteurEntities">
+    <EntitySetMapping Name="Capteurs">
+      <EntityTypeMapping TypeName="GestionCapteurModel.Capteurs">
+        <MappingFragment StoreEntitySet="Capteurs">
+          <ScalarProperty Name="id_capteur" ColumnName="id_capteur" />
+          <ScalarProperty Name="num_capteur" ColumnName="num_capteur" />
+          <ScalarProperty Name="lieu" ColumnName="lieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Releves">
+      <EntityTypeMapping TypeName="GestionCapteurModel.Releves">
+        <MappingFragment StoreEntitySet="Releves">
+          <ScalarProperty Name="id_releve" ColumnName="id_releve" />
+          <ScalarProperty Name="releve_DTTM" ColumnName="releve_DTTM" />
+          <ScalarProperty Name="hygrometrie" ColumnName="hygrometrie" />
+          <ScalarProperty Name="temperature" ColumnName="temperature" />
+          <ScalarProperty Name="id_capteur" ColumnName="id_capteur" />
+          <ScalarProperty Name="insertion_DTTM" ColumnName="insertion_DTTM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

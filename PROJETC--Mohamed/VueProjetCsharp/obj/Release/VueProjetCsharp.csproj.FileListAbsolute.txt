@@ -1,0 +1,4 @@
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\VueProjetCsharp\obj\Release\MainWindow.g.cs
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\VueProjetCsharp\obj\Release\App.g.cs
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\VueProjetCsharp\obj\Release\VueProjetCsharp_MarkupCompile.cache
+C:\Users\Olivier\Documents\C# projet\PROJETC-\PROJETC--Mohamed\VueProjetCsharp\obj\Release\VueProjetCsharp_MarkupCompile.lref
