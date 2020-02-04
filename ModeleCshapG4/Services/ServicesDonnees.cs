@@ -65,14 +65,20 @@ namespace ModeleCshapG4.Services
 
             }
         }
-        public Capteurs getCapteurInfo(Capteurs capteur)
+        public Capteurs getCapteurInfo(int numCapteur)
         {
             using (var context = new GestionCapteurEntities())
             {
-                return context.Capteurs.Include("Releves").Where(c => c.id_capteur == capteur.id_capteur).FirstOrDefault();
+                return context.Capteurs.Include("Releves").Where(c => c.num_capteur == numCapteur).FirstOrDefault();
             }
         }
 
+        public IEnumerable<int> getFilteredListCapteur(string filter )
+        {
+
+           return (from c in this.readAllCapteur() where c.num_capteur.ToString().Substring(0, Math.Min(filter.Length, c.num_capteur.ToString().Length)) == filter select c.num_capteur);
+
+        }
 
     }
 

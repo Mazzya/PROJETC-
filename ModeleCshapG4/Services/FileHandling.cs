@@ -13,9 +13,9 @@ namespace ModeleCshapG4.Services
         
         public void ImportFile(Capteurs capteur, OpenFileDialog openFileDialog)
         {
-            Capteurs capteurs = capteur;
+            //Capteurs capteurs = capteur;
             System.Console.WriteLine(capteur.id_capteur);
-            System.Console.WriteLine(capteurs.id_capteur);
+            System.Console.WriteLine(capteur.id_capteur);
             try
             {
                 HashSet<Releves> listReleves = new HashSet<Releves>();
@@ -32,8 +32,8 @@ namespace ModeleCshapG4.Services
                         temperature = decimal.Parse(lineContent[3].Replace(".", ",")),
                         hygrometrie = decimal.Parse(lineContent[4].Replace(".", ",").Replace("%", "")),
                         insertion_DTTM = DateTime.Now,
-                        
-                    id_capteur = capteurs.id_capteur
+                        Capteurs = capteur,
+                    //id_capteur = capteurs.id_capteur
 
                     
                     };

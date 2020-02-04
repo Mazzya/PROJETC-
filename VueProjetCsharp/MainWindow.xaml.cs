@@ -1,11 +1,13 @@
 ﻿
 using ModeleCshapG4;
 using ModeleCshapG4.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace VueProjetCsharp
 {
@@ -13,58 +15,71 @@ namespace VueProjetCsharp
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
+
     {
+        Capteurs capteurs;
         public MainWindow()
         {
             InitializeComponent();
-           
+            this.capteurs = null;
           
         }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
         private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            textbox.Text = ID_Capteurs.Text;
-            List<Capteurs> listCapteur = new ServicesDonnees().readAllCapteur();
 
-            System.Console.WriteLine(" {0}  {1}", ID_Capteurs.Text, ID_Capteurs.Text.Length);
 
-            Capteurs cap =  listCapteur.First();
-           
-            System.Console.WriteLine(cap.num_capteur.ToString().Substring(0, 1));
-            if (ID_Capteurs.Text.Length > 3 && ID_Capteurs.Text!="ID capteurs")
+            if (ID_Capteurs.Text != "ID Capteurs" && ID_Capteurs.Text.Length > 0)
             {
-                /* ID_Capteurs.ItemsSource = listCapteur.Where(c => c.num_capteur.ToString().Substring(0, ID_Capteurs.Text.Length) == ID_Capteurs.Text);*/
+               
 
+
+                ID_Capteurs.ItemsSource = new ServicesDonnees().getFilteredListCapteur(ID_Capteurs.Text);
+                ID_Capteurs.IsDropDownOpen = true;
+                
+                    var textBox = Keyboard.FocusedElement as System.Windows.Controls.TextBox;
+                    textBox.SelectionLength = 0;
+                   
+                
+            }
+            else
+            {
+
+                ID_Capteurs.ItemsSource = null;
+                ID_Capteurs.IsDropDownOpen = false;
             }
         }
            
         private void ID_Capteurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (this.capteurs != null)
             {
-          
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
 
-
-                List<Capteurs> listcap = new ServicesDonnees().readAllCapteur();
-                Capteurs capteur = listcap.First();
-                
-
-
-
-
-                new FileHandling().ImportFile(capteur, openFileDialog);
+                    new FileHandling().ImportFile(this.capteurs, openFileDialog);
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Merci de valider le choix d'un capteur");
             }
         }
 
-       
+        private void ValidationCapteur(object sender, RoutedEventArgs e)
+
+        {
+            this.capteurs = new ServicesDonnees().getCapteurInfo(int.Parse(ID_Capteurs.Text));
+            System.Windows.Forms.MessageBox.Show(string.Format("le capteur validé est {0}.", this.capteurs.id_capteur.ToString()));
+     
+
+    }
     }
 }
