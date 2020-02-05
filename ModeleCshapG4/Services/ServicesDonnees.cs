@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModeleCshapG4.Services
 {
-    public class ServicesDonnees
+    public static class ServicesDonnees
     {
-        public void AddNewCapteur(int numcapteur, string lieu)
+        public static void AddNewCapteur(int numcapteur, string lieu)
         {
             using (var context = new GestionCapteurEntities())
             {
@@ -22,14 +22,14 @@ namespace ModeleCshapG4.Services
                 context.SaveChanges();
             }
         }
-        public List<Capteurs> readAllCapteur()
+        public static List<Capteurs> readAllCapteur()
         {
             using (var context = new GestionCapteurEntities())
             {
                 return context.Capteurs.ToList();
             }
         }
-        public void AddReleve(DateTime dateReleve, int  idcapteur, decimal temperatur,decimal hygrometry )
+        public static void AddReleve(DateTime dateReleve, int  idcapteur, decimal temperatur,decimal hygrometry )
         {
             using (var context = new GestionCapteurEntities())
             {
@@ -48,7 +48,7 @@ namespace ModeleCshapG4.Services
             }
 
         }
-        public void SaveCapteur(HashSet<Releves> listReleves)
+        public static void SaveCapteur(HashSet<Releves> listReleves)
         {
             
             using (var context = new GestionCapteurEntities())
@@ -65,7 +65,7 @@ namespace ModeleCshapG4.Services
 
             }
         }
-        public Capteurs getCapteurInfo(int numCapteur)
+        public static Capteurs getCapteurInfo(int numCapteur)
         {
             using (var context = new GestionCapteurEntities())
             {
@@ -73,10 +73,10 @@ namespace ModeleCshapG4.Services
             }
         }
 
-        public IEnumerable<int> getFilteredListCapteur(string filter )
+        public static  IEnumerable<int> getFilteredListCapteur(string filter )
         {
 
-           return (from c in this.readAllCapteur() where c.num_capteur.ToString().Substring(0, Math.Min(filter.Length, c.num_capteur.ToString().Length)) == filter select c.num_capteur);
+           return (from c in readAllCapteur() where c.num_capteur.ToString().Substring(0, Math.Min(filter.Length, c.num_capteur.ToString().Length)) == filter select c.num_capteur);
 
         }
 

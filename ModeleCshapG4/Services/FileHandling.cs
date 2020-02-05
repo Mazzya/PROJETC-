@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace ModeleCshapG4.Services
 {
-    public class FileHandling
+    public static class ServiceFileHandling
     {
 
         
-        public void ImportFile(Capteurs capteur, OpenFileDialog openFileDialog)
+        public static void ImportFile(Capteurs capteur, OpenFileDialog openFileDialog)
         {
             //Capteurs capteurs = capteur;
             System.Console.WriteLine(capteur.id_capteur);
@@ -42,7 +42,7 @@ namespace ModeleCshapG4.Services
 
                     listReleves.Add(releves);
                 }
-                new ServicesDonnees().SaveCapteur(listReleves);
+                ServicesDonnees.SaveCapteur(listReleves);
             }
             catch (Exception ex)
             {

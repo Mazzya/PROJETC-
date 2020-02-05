@@ -27,20 +27,26 @@ namespace VueProjetCsharp
 
         private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            var selectionCombo =  ID_Capteurs.SelectedItem as Nullable<int>;
 
-
+            if (selectionCombo!=null)
+            {
+                ID_Capteurs.SelectedIndex = -1;
+            }
             if (ID_Capteurs.Text != "ID Capteurs" && ID_Capteurs.Text.Length > 0)
             {
-               
 
 
-                ID_Capteurs.ItemsSource = new ServicesDonnees().getFilteredListCapteur(ID_Capteurs.Text);
+
+                ID_Capteurs.ItemsSource =  ServicesDonnees.getFilteredListCapteur(ID_Capteurs.Text);
                 ID_Capteurs.IsDropDownOpen = true;
+
+                var textBox = Keyboard.FocusedElement as System.Windows.Controls.TextBox;
+                textBox.SelectionLength = 0;           
+                textBox.SelectionStart = ID_Capteurs.Text.Length;
                 
-                    var textBox = Keyboard.FocusedElement as System.Windows.Controls.TextBox;
-                    textBox.SelectionLength = 0;
-                   
-                
+
+
             }
             else
             {
@@ -48,6 +54,7 @@ namespace VueProjetCsharp
                 ID_Capteurs.ItemsSource = null;
                 ID_Capteurs.IsDropDownOpen = false;
             }
+
         }
            
         private void ID_Capteurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,7 +71,7 @@ namespace VueProjetCsharp
                 if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
 
-                    new FileHandling().ImportFile(this.capteurs, openFileDialog);
+                     ServiceFileHandling.ImportFile(this.capteurs, openFileDialog);
                 }
             }
             else
@@ -76,7 +83,7 @@ namespace VueProjetCsharp
         private void ValidationCapteur(object sender, RoutedEventArgs e)
 
         {
-            this.capteurs = new ServicesDonnees().getCapteurInfo(int.Parse(ID_Capteurs.Text));
+            this.capteurs =ServicesDonnees.getCapteurInfo(int.Parse(ID_Capteurs.Text));
             System.Windows.Forms.MessageBox.Show(string.Format("le capteur validé est {0}.", this.capteurs.id_capteur.ToString()));
      
 
