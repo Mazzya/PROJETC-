@@ -20,7 +20,6 @@ namespace ModeleCshapG4
         public decimal temperature { get; set; }
         public int id_capteur { get; set; }
         public System.DateTime insertion_DTTM { get; set; }
-    
         public virtual Capteurs Capteurs { get; set; }
     }
 }

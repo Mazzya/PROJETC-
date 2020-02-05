@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace ModeleCshapG4.Services
 {
@@ -14,11 +16,10 @@ namespace ModeleCshapG4.Services
         public static void ImportFile(Capteurs capteur, OpenFileDialog openFileDialog)
         {
             //Capteurs capteurs = capteur;
-            System.Console.WriteLine(capteur.id_capteur);
-            System.Console.WriteLine(capteur.id_capteur);
+
             try
             {
-                HashSet<Releves> listReleves = new HashSet<Releves>();
+
                 string[] lines = ToolsDataTest.isExtensionEqualsToTxt(openFileDialog);
                 foreach (string line in lines)
 
@@ -32,17 +33,16 @@ namespace ModeleCshapG4.Services
                         temperature = decimal.Parse(lineContent[3].Replace(".", ",")),
                         hygrometrie = decimal.Parse(lineContent[4].Replace(".", ",").Replace("%", "")),
                         insertion_DTTM = DateTime.Now,
-                        Capteurs = capteur,
-                    //id_capteur = capteurs.id_capteur
+                        id_capteur = capteur.id_capteur
 
                     
                     };
                                    
                   
 
-                    listReleves.Add(releves);
+                    capteur.Releves.Add(releves);
                 }
-                ServicesDonnees.SaveCapteur(listReleves);
+                ServicesDonnees.SaveCapteur(capteur);
             }
             catch (Exception ex)
             {
@@ -51,5 +51,43 @@ namespace ModeleCshapG4.Services
 
 
         }
+        public static void ExportCSV(Capteurs capteur, FolderBrowserDialog folderBrowser  )
+        {
+            var sb = new StringBuilder();
+
+            var finalPath = Path.Combine(folderBrowser.SelectedPath, capteur.num_capteur+ "_" + DateTime.Now.ToString("yyyyMMdd_HHMMSS")  + ".csv");
+            var header = "";
+            var info = typeof(Releves).GetProperties();
+            if (!File.Exists(finalPath))
+            {
+                var file = File.Create(finalPath);
+                file.Close();
+                foreach (var prop in typeof(Releves).GetProperties())
+                {
+                    header += prop.Name + "; ";
+                }
+                header = header.Substring(0, header.Length - 2);
+                sb.AppendLine(header);
+                TextWriter sw = new StreamWriter(finalPath, true);
+                sw.Write(sb.ToString());
+                sw.Close();
+            }
+            foreach (var obj in capteur.Releves)
+            {
+                sb = new StringBuilder();
+                var line = "";
+                foreach (var prop in info)
+                {
+                    line += prop.GetValue(obj, null) + "; ";
+                }
+                line = line.Substring(0, line.Length - 2);
+                sb.AppendLine(line);
+                TextWriter sw = new StreamWriter(finalPath, true);
+                sw.Write(sb.ToString());
+                sw.Close();
+            }
+        }
     }
+
 }
+    

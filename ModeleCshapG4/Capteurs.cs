@@ -15,10 +15,7 @@ namespace ModeleCshapG4
     public partial class Capteurs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Capteurs()
-        {
-            this.Releves = new HashSet<Releves>();
-        }
+
     
         public int id_capteur { get; set; }
         public int num_capteur { get; set; }

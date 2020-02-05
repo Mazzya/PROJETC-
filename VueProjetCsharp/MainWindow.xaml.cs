@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace VueProjetCsharp
 {
@@ -72,12 +73,16 @@ namespace VueProjetCsharp
                 {
 
                      ServiceFileHandling.ImportFile(this.capteurs, openFileDialog);
+                    this.capteurs = ServicesDonnees.getCapteurInfo(capteurs.num_capteur);
+
+                    MessageBox.Show(string.Format("Nombre de relevés importées{0}", capteurs.Releves.Count));
                 }
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("Merci de valider le choix d'un capteur");
             }
+
         }
 
         private void ValidationCapteur(object sender, RoutedEventArgs e)
@@ -88,5 +93,26 @@ namespace VueProjetCsharp
      
 
     }
+        private void ExportCSV(object sender, RoutedEventArgs e)
+        {
+            if (this.capteurs != null)
+            {
+                FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+
+                if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    ServiceFileHandling.ExportCSV(this.capteurs, folderBrowser);
+                    System.Windows.Forms.MessageBox.Show("Fichier Exporté");
+
+
+                }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Merci de valider le choix d'un capteur");
+            }
+        }
+
     }
 }

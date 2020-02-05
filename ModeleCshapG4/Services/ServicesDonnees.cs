@@ -48,19 +48,19 @@ namespace ModeleCshapG4.Services
             }
 
         }
-        public static void SaveCapteur(HashSet<Releves> listReleves)
+        public static void SaveCapteur(Capteurs capteur)
         {
             
             using (var context = new GestionCapteurEntities())
             {
+
+
+
+               var entity =  context.Capteurs.Find(capteur.id_capteur);
+
                 
-                foreach (Releves releve in listReleves)
-                {
-                    ;
-                    context.Releves.Add(releve);
-                    
-                }
-             
+                entity.Releves = capteur.Releves;
+               
                 context.SaveChanges();
 
             }
