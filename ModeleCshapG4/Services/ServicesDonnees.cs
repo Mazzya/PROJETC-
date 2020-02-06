@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,15 +74,29 @@ namespace ModeleCshapG4.Services
             }
         }
 
-        public static  IEnumerable<int> getFilteredListCapteur(string filter )
+        public static IEnumerable<int> getFilteredListCapteur(string filter )
         {
 
            return (from c in readAllCapteur() where c.num_capteur.ToString().Substring(0, Math.Min(filter.Length, c.num_capteur.ToString().Length)) == filter select c.num_capteur);
 
         }
-        
+        public static void DeleteReleves(IList<Object> listReleves)
+        {
+            using (var context = new GestionCapteurEntities())
+            {
+                foreach (Releves Rel in listReleves)
+                {
+                    Releves releves = context.Releves.Find(Rel.id_releve);
+
+                    context.Releves.Remove(releves);
+                }
+                context.SaveChanges();
+                        }
+
+        }
+
+
     }
-
-
-}
-
+    }
+        
+   

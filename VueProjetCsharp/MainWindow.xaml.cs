@@ -167,6 +167,13 @@ namespace VueProjetCsharp
 
 
         }
-}
+
+        private void DeleteReleve(object sender, RoutedEventArgs e)
+        {
+            ServicesDonnees.DeleteReleves((IList<Object>)RelevesDG.SelectedItems);
+            this.capteurs = ServicesDonnees.getCapteurInfo(capteurs.num_capteur);
+            refreshComponent();
+        }
+    }
 
     }
