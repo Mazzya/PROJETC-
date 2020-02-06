@@ -55,17 +55,27 @@ namespace ModeleCshapG4.Services
         {
             var sb = new StringBuilder();
 
-            var finalPath = Path.Combine(folderBrowser.SelectedPath, capteur.num_capteur+ "_" + DateTime.Now.ToString("yyyyMMdd_HHMMSS")  + ".csv");
+            var finalPath = Path.Combine(folderBrowser.SelectedPath, capteur.num_capteur+ "_" + DateTime.Now.ToString("yyyyMMdd_HHmmss")  + ".csv");
             var header = "";
             var info = typeof(Releves).GetProperties();
+            List<string> unwantedProperties = new List<string>() { "Capteurs", "id_capteur", "id_releve" };
             if (!File.Exists(finalPath))
             {
                 var file = File.Create(finalPath);
                 file.Close();
+           
+
+
+
+                
                 foreach (var prop in typeof(Releves).GetProperties())
                 {
-                    header += prop.Name + "; ";
+                    if (!unwantedProperties.Contains(prop.Name))
+                    {
+                        header += prop.Name + "; ";
+                    }
                 }
+
                 header = header.Substring(0, header.Length - 2);
                 sb.AppendLine(header);
                 TextWriter sw = new StreamWriter(finalPath, true);
@@ -78,7 +88,10 @@ namespace ModeleCshapG4.Services
                 var line = "";
                 foreach (var prop in info)
                 {
-                    line += prop.GetValue(obj, null) + "; ";
+                    if (!unwantedProperties.Contains(prop.Name))
+                    {
+                        line += prop.GetValue(obj, null) + "; ";
+                    }
                 }
                 line = line.Substring(0, line.Length - 2);
                 sb.AppendLine(line);

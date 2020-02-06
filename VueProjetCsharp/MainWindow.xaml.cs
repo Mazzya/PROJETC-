@@ -75,7 +75,7 @@ namespace VueProjetCsharp
                      ServiceFileHandling.ImportFile(this.capteurs, openFileDialog);
                     this.capteurs = ServicesDonnees.getCapteurInfo(capteurs.num_capteur);
 
-                    MessageBox.Show(string.Format("Nombre de relevés importées{0}", capteurs.Releves.Count));
+                    MessageBox.Show(string.Format("Nombre de relevés importées : {0}.", capteurs.Releves.Count));
                 }
             }
             else

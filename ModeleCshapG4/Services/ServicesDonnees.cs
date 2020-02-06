@@ -79,7 +79,7 @@ namespace ModeleCshapG4.Services
            return (from c in readAllCapteur() where c.num_capteur.ToString().Substring(0, Math.Min(filter.Length, c.num_capteur.ToString().Length)) == filter select c.num_capteur);
 
         }
-
+        
     }
 
 
