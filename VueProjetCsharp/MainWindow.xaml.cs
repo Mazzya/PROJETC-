@@ -1,12 +1,14 @@
 ﻿
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using ModeleCshapG4;
 using ModeleCshapG4.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -29,6 +31,7 @@ namespace VueProjetCsharp
         public LineSeries TempSerie { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+        public Func<double, string> XFormatter { get; set; }
 
 
         public MainWindow()
@@ -45,6 +48,8 @@ namespace VueProjetCsharp
 
         }
 
+
+    
         private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var selectionCombo = ID_Capteurs.SelectedItem as Nullable<int>;
@@ -109,7 +114,7 @@ namespace VueProjetCsharp
             this.capteurs = ServicesDonnees.getCapteurInfo(int.Parse(ID_Capteurs.Text));
             System.Windows.Forms.MessageBox.Show(string.Format("le capteur validé est {0}.", this.capteurs.id_capteur.ToString()));
 
-            refreshComponent();
+           refreshComponent();
 
         }
         private void ExportCSV(object sender, RoutedEventArgs e)
@@ -135,6 +140,7 @@ namespace VueProjetCsharp
         private void refreshComponent()
         {
             bindingraph();
+            RelevesDG.ItemsSource = capteurs.Releves;
 
         }
         private void bindingraph()
@@ -142,19 +148,17 @@ namespace VueProjetCsharp
 
 
 
-            HygroSerie.Values  = new ChartValues<double>(capteurs.Releves.Select(l => Decimal.ToDouble(l.hygrometrie)));
+            HygroSerie.Values  = new ChartValues<DateTimePoint>(capteurs.Releves.Select(l => new DateTimePoint(l.releve_DTTM,Decimal.ToDouble(l.hygrometrie))));
             HygroSerie.Title = "Hygrometrie";
 
-            TempSerie.Values  = new ChartValues<double>(capteurs.Releves.Select(l => Decimal.ToDouble(l.temperature)));
+            TempSerie.Values  = new ChartValues<DateTimePoint>(capteurs.Releves.Select(l => new DateTimePoint(l.releve_DTTM, Decimal.ToDouble(l.temperature))));
             TempSerie.Title = "Température";
 
 
-            
 
 
+            XFormatter = val => new DateTime((long)val).ToString("dd/MM/yyyy HH:mm:ss");
 
-
-            Labels = capteurs.Releves.Select(l => l.releve_DTTM.ToString()).ToList().ToArray();
             YFormatter = value => value.ToString("F");
 
             chart.DataContext = this;
