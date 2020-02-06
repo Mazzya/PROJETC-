@@ -1,9 +1,12 @@
 ﻿
+using LiveCharts;
+using LiveCharts.Wpf;
 using ModeleCshapG4;
 using ModeleCshapG4.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -15,22 +18,38 @@ namespace VueProjetCsharp
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
 
+
     {
-        Capteurs capteurs;
+        public Capteurs capteurs { get; set; }
+        public SeriesCollection SeriesCollection { get; set; }
+        public LineSeries HygroSerie { get; set; }
+        public LineSeries TempSerie { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> YFormatter { get; set; }
+
+
         public MainWindow()
         {
-            InitializeComponent();
             this.capteurs = null;
-          
+
+            InitializeComponent();
+            HygroSerie = new LineSeries(Title = "Hygrometrie");
+            TempSerie = new LineSeries(Title = "Temperature");
+
+            SeriesCollection = new SeriesCollection { HygroSerie, TempSerie };
+
+
+
         }
 
         private void ComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var selectionCombo =  ID_Capteurs.SelectedItem as Nullable<int>;
+            var selectionCombo = ID_Capteurs.SelectedItem as Nullable<int>;
 
-            if (selectionCombo!=null)
+            if (selectionCombo != null)
             {
                 ID_Capteurs.SelectedIndex = -1;
             }
@@ -39,13 +58,13 @@ namespace VueProjetCsharp
 
 
 
-                ID_Capteurs.ItemsSource =  ServicesDonnees.getFilteredListCapteur(ID_Capteurs.Text);
+                ID_Capteurs.ItemsSource = ServicesDonnees.getFilteredListCapteur(ID_Capteurs.Text);
                 ID_Capteurs.IsDropDownOpen = true;
 
                 var textBox = Keyboard.FocusedElement as System.Windows.Controls.TextBox;
-                textBox.SelectionLength = 0;           
+                textBox.SelectionLength = 0;
                 textBox.SelectionStart = ID_Capteurs.Text.Length;
-                
+
 
 
             }
@@ -57,12 +76,8 @@ namespace VueProjetCsharp
             }
 
         }
-           
-        private void ID_Capteurs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
 
-        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -72,11 +87,14 @@ namespace VueProjetCsharp
                 if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
 
-                     ServiceFileHandling.ImportFile(this.capteurs, openFileDialog);
+                    ServiceFileHandling.ImportFile(this.capteurs, openFileDialog);
                     this.capteurs = ServicesDonnees.getCapteurInfo(capteurs.num_capteur);
 
+                    refreshComponent();
                     MessageBox.Show(string.Format("Nombre de relevés importées : {0}.", capteurs.Releves.Count));
+
                 }
+
             }
             else
             {
@@ -88,11 +106,12 @@ namespace VueProjetCsharp
         private void ValidationCapteur(object sender, RoutedEventArgs e)
 
         {
-            this.capteurs =ServicesDonnees.getCapteurInfo(int.Parse(ID_Capteurs.Text));
+            this.capteurs = ServicesDonnees.getCapteurInfo(int.Parse(ID_Capteurs.Text));
             System.Windows.Forms.MessageBox.Show(string.Format("le capteur validé est {0}.", this.capteurs.id_capteur.ToString()));
-     
 
-    }
+            refreshComponent();
+
+        }
         private void ExportCSV(object sender, RoutedEventArgs e)
         {
             if (this.capteurs != null)
@@ -113,6 +132,37 @@ namespace VueProjetCsharp
                 System.Windows.Forms.MessageBox.Show("Merci de valider le choix d'un capteur");
             }
         }
+        private void refreshComponent()
+        {
+            bindingraph();
+
+        }
+        private void bindingraph()
+        {
+
+
+
+            HygroSerie.Values  = new ChartValues<double>(capteurs.Releves.Select(l => Decimal.ToDouble(l.hygrometrie)));
+            HygroSerie.Title = "Hygrometrie";
+
+            TempSerie.Values  = new ChartValues<double>(capteurs.Releves.Select(l => Decimal.ToDouble(l.temperature)));
+            TempSerie.Title = "Température";
+
+
+            
+
+
+
+
+            Labels = capteurs.Releves.Select(l => l.releve_DTTM.ToString()).ToList().ToArray();
+            YFormatter = value => value.ToString("F");
+
+            chart.DataContext = this;
+ 
+            chart.Update(true, true);
+
+
+        }
+}
 
     }
-}
